@@ -651,6 +651,9 @@ if (is_plugin_active('contact-form-7/wp-contact-form-7.php') && !class_exists('A
                 //curl_setopt($ch, CURLOPT_UNRESTRICTED_AUTH, true);
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
                 curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+                $fp = fopen(dirname(__FILE__).'/errorlog.txt', 'w');
+                curl_setopt($ch, CURLOPT_VERBOSE, 1);
+                curl_setopt($ch, CURLOPT_STDERR, $fp);
                 switch ($requestMethod) {
                     case 'POST':
                         curl_setopt($ch, CURLOPT_URL, $agile_url.$endPoint);
