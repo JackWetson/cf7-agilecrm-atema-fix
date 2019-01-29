@@ -1,19 +1,19 @@
 <?php
 /**
- * @author Gary McPherson (genyus) <gary@ingenyus.com>
+ * @author Jack Wetson-Catt (Atema Ltd) <hello@atema.tech>
  * @license http://www.gnu.org/licenses/agpl-3.0.html
  */
 
 /*
-Plugin Name: Contact Form 7 Agile CRM integration
-Plugin URI: https://ingenyus.com
-Description: Agile CRM integration plugin for Contact Form 7. Sync form entries to Agile easily.
-Version: 1.0.1
-Author: Gary McPherson
-Author URI: https://ingenyus.com
+Plugin Name: Contact Form 7 Agile CRM Integration - Atema Fix
+Plugin URI: https://www.atema.tech
+Description: Agile CRM integration plugin for Contact Form 7. Sync form entries to Agile easily. Curl fix by Atema Ltd
+Version: 2.0.0
+Author: Jack Wetson-Catt (Atema Ltd)
+Author URI: https://www.atema.tech
 License: AGPLv3
 Text Domain: ccontact-form-7-agilecrm-integration
-GitHub Plugin URI: Genyus/cf7-agilecrm
+GitHub Plugin URI: JackWetson/cf7-agilecrm-atema-fix
 GitHub Branch: master
 */
 define('CF7_AGILE__PLUGIN_URL', plugin_dir_url(__FILE__));
@@ -32,8 +32,8 @@ if (is_plugin_active('contact-form-7/wp-contact-form-7.php') && !class_exists('A
         private $account_settings_tab = 'account';
         private $form_settings_tab = 'form';
         private $plugin_settings_tabs = array();
-        protected $name = 'Contact Form 7 Agile CRM Add-On';
-        protected $version = '1.0';
+        protected $name = 'Contact Form 7 Agile CRM Add-On - Atema Fix';
+        protected $version = '2.0';
 
         private static $instance;
         private $settings;
@@ -649,7 +649,8 @@ if (is_plugin_active('contact-form-7/wp-contact-form-7.php') && !class_exists('A
                 //curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
                 //curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
                 //curl_setopt($ch, CURLOPT_UNRESTRICTED_AUTH, true);
-
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
                 switch ($requestMethod) {
                     case 'POST':
                         curl_setopt($ch, CURLOPT_URL, $agile_url.$endPoint);

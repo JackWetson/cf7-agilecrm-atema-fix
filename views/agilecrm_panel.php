@@ -1,6 +1,6 @@
 <?php
 /**
- * @author Gary McPherson (genyus) <gary@ingenyus.com>
+ * @author Jack Wetson-Catt (Atema Ltd) <hello@atema.tech>
  * @license http://www.gnu.org/licenses/agpl-3.0.html
  */
 ?>
