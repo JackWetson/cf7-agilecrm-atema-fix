@@ -604,14 +604,18 @@ if (is_plugin_active('contact-form-7/wp-contact-form-7.php') && !class_exists('A
 
                 if (isset($finalData['id'])) {
                     //creating notes if it is mapped
-                    if ($data['notes'] != '') {
+                    foreach($data as $key => $one) {
+                        if(fnmatch('*wpcf7*',$key)){
+                            unset($data[$key]);
+                        }
+                    }
                         $noteJson = json_encode(array(
-                            'subject' => ($data['subject'] != '') ? $data['subject'] : 'Submitted via Contact Form 7',
-                            'description' => $data['notes'],
+                            'subject' => 'Submitted via Contact Form 7',
+                            'description' => print_r($data, true),
                             'contact_ids' => array($finalData['id']),
                         ));
                         $this->agile_http('notes', $noteJson, 'POST');
-                    }
+                    
                 }
 
                 //$wpcf7->skip_mail = true;
